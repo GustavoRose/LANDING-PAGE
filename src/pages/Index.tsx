@@ -9,18 +9,23 @@ import { MessageCircle } from "lucide-react";
 const Index = () => {
   // Número oficial Cheiro de Rosa com código de país
   const myPhoneNumber = "5548988048880"; 
-  const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=Olá!%20Vim%20pela%20página%20e%20gostaria%20de%20um%20atendimento%20discreto.`;
+  
+  // Mensagem personalizada mais direta e instigante
+  const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=Olá!%20Vim%20pela%20página%20Boutique%20Floripa%20e%20quero%20conhecer%20os%20kits%20exclusivos.`;
 
   const handleFloatingClick = () => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Contact', { content_name: 'Botão Flutuante' });
+      (window as any).fbq('track', 'Contact', { 
+        content_name: 'Botão Flutuante WhatsApp',
+        content_category: 'Atendimento'
+      });
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-background relative selection:bg-coral/30">
       
-      {/* Background - Opacidade aumentada para garantir visibilidade */}
+      {/* Background - Opacidade ajustada para profundidade visual */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <img 
           src={heroBg} 
@@ -30,7 +35,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
       </div>
 
-      {/* Botão Flutuante Restaurado */}
+      {/* Botão Flutuante de Alta Conversão */}
       <a 
         href={whatsappUrl}
         onClick={handleFloatingClick}
@@ -45,45 +50,63 @@ const Index = () => {
       <main className="flex-1 relative z-10 flex flex-col items-center px-4 py-10 md:py-20">
         <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto space-y-8 md:space-y-12">
           
+          {/* Logo com animação suave */}
           <div className="animate-float">
             <img 
               src={logo} 
-              alt="Cheiro de Rosa" 
+              alt="Boutique Floripa" 
               className="h-16 md:h-28 w-auto drop-shadow-2xl"
             />
           </div>
 
           <div className="w-16 md:w-32 h-[1px] bg-gradient-to-r from-transparent via-coral to-transparent opacity-60" />
 
+          {/* Header com Copy Ousada e Direta */}
           <header className="space-y-4">
             <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-[1.1] tracking-tight">
-              Sua Intimidade com <br />
-              <span className="text-coral drop-shadow-sm">Máxima Discrição</span>
+              Ouse Descobrir <br />
+              <span className="text-coral drop-shadow-sm">Novas Sensações</span>
             </h1>
             <p className="font-body text-base md:text-xl text-coral-light/90 font-medium max-w-2xl mx-auto leading-relaxed">
-              Atendimento especializado na Grande Florianópolis. <br className="hidden sm:block" />
-              Receba hoje com embalagem 100% descaracterizada.
+              Curadoria premium de bem-estar íntimo na Grande Florianópolis. <br className="hidden sm:block" />
+              Kits exclusivos desenvolvidos para quem não aceita o comum.
             </p>
           </header>
 
+          {/* Seção de Benefícios */}
           <section className="w-full">
             <FeatureCards />
           </section>
 
+          {/* Prova Social */}
           <section className="w-full py-4 border-y border-coral/10 bg-white/5 backdrop-blur-sm rounded-2xl">
             <Testimonials />
           </section>
 
+          {/* Call to Action Principal */}
           <div className="flex flex-col items-center gap-5 w-full max-w-md">
             <div className="w-full transform transition-transform hover:scale-[1.02] active:scale-[0.98]">
-              <WhatsAppButton phoneNumber={myPhoneNumber} label="QUERO ATENDIMENTO AGORA" />
+              <WhatsAppButton 
+                phoneNumber={myPhoneNumber} 
+                label="QUERO MEU KIT EXCLUSIVO" 
+              />
             </div>
             
             <div className="flex items-center justify-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
               <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-emerald-500 text-xs md:text-sm font-semibold tracking-wide uppercase">
-                Consultores disponíveis agora
+                Consultoria Privada Disponível agora
               </span>
+            </div>
+
+            {/* Micro-copy de segurança e urgência */}
+            <div className="space-y-1">
+              <p className="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest opacity-80">
+                Entrega discreta e imediata • Embalagem neutra
+              </p>
+              <p className="text-[10px] text-muted-foreground/60 italic">
+                Sua privacidade é nossa prioridade absoluta.
+              </p>
             </div>
           </div>
         </div>
