@@ -7,31 +7,21 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
 import FaqSection from "@/components/FaqSection";
+import { WHATSAPP_NUMBER, WHATSAPP_MESSAGES, buildWhatsappUrl } from "@/config/contact";
 
 const Index = () => {
-  // Número oficial Cheiro de Rosa com código de país
-  const myPhoneNumber = "5548988048880";
-
-  // Mensagens de WhatsApp diferentes por origem = você sabe qual botão converte mais
-  const buildWhatsappUrl = (message: string) =>
-    `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`;
-
   const handleWhatsClick = (origin: string, message: string) => {
-    if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Contact", {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "Contact", {
         content_name: origin,
         content_category: "Atendimento",
       });
     }
-    window.open(buildWhatsappUrl(message), "_blank", "noopener,noreferrer");
-  };
-
-  const messages = {
-    floating: "Olá! Vim pela página e quero conhecer os kits exclusivos.",
-    ctaMain:
-      "Oi! Quero ajuda pra escolher um kit ideal pra mim, pode me orientar?",
-    mobileFixed:
-      "Oi! Vim pelo site, pode me ajudar a escolher um kit com entrega hoje?",
+    window.open(
+      buildWhatsappUrl(WHATSAPP_NUMBER, message),
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
@@ -42,13 +32,15 @@ const Index = () => {
           src={heroBg}
           alt=""
           className="w-full h-full object-cover opacity-40 mix-blend-soft-light"
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
       </div>
 
       {/* Botão flutuante WhatsApp (desktop e tablet — no mobile a barra fixa já cumpre esse papel) */}
       <button
-        onClick={() => handleWhatsClick("Botão Flutuante", messages.floating)}
+        onClick={() => handleWhatsClick("Botão Flutuante", WHATSAPP_MESSAGES.floating)}
         aria-label="Atendimento privado no WhatsApp"
         title="Atendimento privado no WhatsApp"
         className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_40px_-10px_rgba(37,211,102,0.5)] hover:scale-110 active:scale-95 transition-all animate-pulse items-center justify-center border-none"
@@ -62,7 +54,7 @@ const Index = () => {
           <div className="animate-float">
             <img
               src={logo}
-              alt="Boutique Floripa"
+              alt="Cheiro de Rosa"
               className="h-16 md:h-28 w-auto drop-shadow-2xl"
             />
           </div>
@@ -101,21 +93,38 @@ const Index = () => {
             <Testimonials />
           </section>
 
-          {/* Micro prova social mobile — reforço rápido antes do scroll acabar */}
+          {/* Micro prova social mobile — reforço rápido antes do scroll acabar.
+              Usando o dado real (nota + nº de avaliações no Google) em vez de
+              um número de clientes não verificável. */}
           <div className="md:hidden flex items-center justify-center gap-2 text-xs text-muted-foreground">
             <span className="text-emerald-500">★★★★★</span>
-            <span>Mais de 1.000 clientes atendidas com discrição</span>
+            <span>Nota 5/5 em mais de 70 avaliações no Google</span>
           </div>
 
           {/* CTA principal desktop */}
           <div className="hidden md:flex flex-col items-center gap-4 w-full max-w-md">
-            <div
-              className="w-full transform transition-transform hover:scale-[1.02] active:scale-[0.98]"
-              onClick={() => handleWhatsClick("CTA Principal Desktop", messages.ctaMain)}
-            >
+            <div className="w-full transform transition-transform hover:scale-[1.02] active:scale-[0.98]">
+              {/*
+                NOTA IMPORTANTE:
+                O onClick foi movido para o próprio WhatsAppButton (via prop),
+                em vez de embrulhar o componente num <div onClick>. Isso corrige
+                um problema de acessibilidade: um <div> não é focável nem
+                acionável via teclado, e leitores de tela podem não anunciá-lo
+                como interativo.
+
+                Isso exige que o componente WhatsAppButton aceite uma prop
+                `onClick` e a aplique ao elemento <button> ou <a> que ele
+                renderiza internamente. Se ele já constrói o link do WhatsApp
+                sozinho a partir de phoneNumber, ajuste-o para:
+                  1. chamar onClick (se fornecido) para o tracking, e
+                  2. em seguida abrir o link normalmente.
+                Se preferir não alterar o componente agora, me envie o código
+                dele que eu adapto os dois juntos.
+              */}
               <WhatsAppButton
-                phoneNumber={myPhoneNumber}
+                phoneNumber={WHATSAPP_NUMBER}
                 label="FALAR COM UMA CONSULTORA AGORA"
+                onClick={() => handleWhatsClick("CTA Principal Desktop", WHATSAPP_MESSAGES.ctaMain)}
               />
             </div>
 
@@ -148,15 +157,14 @@ const Index = () => {
         </div>
       </main>
 
-      {/* CTA fixo mobile — a maior parte do seu tráfego provavelmente é mobile,
+      {/* CTA fixo mobile — a maior parte do tráfego provavelmente é mobile,
           então este é o botão que mais importa */}
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur border-t border-coral/20 p-3">
-        <div onClick={() => handleWhatsClick("CTA Mobile Fixo", messages.mobileFixed)}>
-          <WhatsAppButton
-            phoneNumber={myPhoneNumber}
-            label="FALAR COM UMA CONSULTORA AGORA"
-          />
-        </div>
+        <WhatsAppButton
+          phoneNumber={WHATSAPP_NUMBER}
+          label="FALAR COM UMA CONSULTORA AGORA"
+          onClick={() => handleWhatsClick("CTA Mobile Fixo", WHATSAPP_MESSAGES.mobileFixed)}
+        />
         <p className="text-[11px] text-muted-foreground text-center mt-1">
           Atendimento discreto • Sem compromisso • Resposta rápida
         </p>
