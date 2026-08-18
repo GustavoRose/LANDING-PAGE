@@ -1,80 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
-
 @layer base {
   :root {
     --background: 0 0% 5%;
     --foreground: 0 0% 95%;
-
     --card: 0 0% 8%;
     --card-foreground: 0 0% 95%;
-
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 95%;
-
     --primary: 14 90% 58%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 14 40% 12%;
     --secondary-foreground: 0 0% 95%;
-
     --muted: 14 20% 10%;
     --muted-foreground: 0 0% 70%;
-
     --accent: 14 90% 58%;
     --accent-foreground: 0 0% 5%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 14 30% 18%;
     --input: 14 30% 18%;
     --ring: 14 90% 58%;
-
     --radius: 0.5rem;
-
     /* Custom tokens - Cheiro de Rosa brand */
     --coral: 14 90% 58%;
     --coral-light: 14 85% 70%;
     --coral-dark: 14 80% 45%;
     --warm-black: 0 0% 5%;
     --soft-white: 30 20% 95%;
-
     --gradient-luxury: linear-gradient(135deg, hsl(14 40% 12%) 0%, hsl(0 0% 5%) 50%, hsl(14 30% 8%) 100%);
     --gradient-coral: linear-gradient(135deg, hsl(14 90% 58%) 0%, hsl(20 85% 65%) 50%, hsl(14 90% 58%) 100%);
     --gradient-cta: linear-gradient(135deg, hsl(142 70% 40%) 0%, hsl(142 60% 35%) 100%);
-
     --shadow-glow: 0 0 40px hsl(14 90% 58% / 0.3);
     --shadow-coral: 0 0 30px hsl(14 90% 58% / 0.4);
-
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Montserrat', sans-serif;
   }
-
   .dark {
     --background: 0 0% 5%;
     --foreground: 0 0% 95%;
   }
 }
-
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
   }
 }
-
 @layer utilities {
   .text-gradient-coral {
     background: var(--gradient-coral);
@@ -82,42 +62,33 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
   .bg-gradient-luxury {
     background: var(--gradient-luxury);
   }
-
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
-
   .shadow-gold {
     box-shadow: var(--shadow-gold);
   }
-
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
-
   .animate-shimmer {
     animation: shimmer 3s ease-in-out infinite;
   }
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
-
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px hsl(142 70% 40% / 0.5), 0 0 40px hsl(142 70% 40% / 0.3); }
   50% { box-shadow: 0 0 30px hsl(142 70% 40% / 0.7), 0 0 60px hsl(142 70% 40% / 0.5); }
 }
-
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
