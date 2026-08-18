@@ -4,22 +4,38 @@ interface WhatsAppButtonProps {
   phoneNumber: string;
   message?: string;
   label?: string;
+  /**
+   * Chamado antes de abrir o WhatsApp. Use para tracking (fbq, GA, etc.)
+   * e/ou para sobrescrever a mensagem enviada por origem do clique.
+   * Se não for passado, o componente usa o comportamento padrão abaixo
+   * (mensagem genérica + tracking próprio).
+   */
+  onClick?: () => void;
 }
 
-const WhatsAppButton = ({ 
-  phoneNumber, 
-  message = "Olá! Vim do Instagram e gostaria de saber mais sobre os produtos.", 
-  label = "Fale Conosco no WhatsApp" 
+const WhatsAppButton = ({
+  phoneNumber,
+  message = "Olá! Vim do Instagram e gostaria de saber mais sobre os produtos.",
+  label = "Fale Conosco no WhatsApp",
+  onClick,
 }: WhatsAppButtonProps) => {
-  
   const handleClick = () => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Contact');
+    // Se o componente pai controla tracking/mensagem (caso do Index.tsx,
+    // que define uma mensagem diferente por origem do clique), delega a ele
+    // e não abre o link duas vezes nem dispara tracking duplicado.
+    if (onClick) {
+      onClick();
+      return;
     }
 
+    // Comportamento padrão (fallback), usado apenas quando o componente
+    // é utilizado sem a prop onClick.
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "Contact");
+    }
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, "_blank");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
