@@ -6,7 +6,6 @@ import Testimonials from "@/components/Testimonials";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
-import FaqSection from "@/components/FaqSection";
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGES, buildWhatsappUrl } from "@/config/contact";
 
 const Index = () => {
@@ -148,9 +147,6 @@ const Index = () => {
               Sem compromisso • Atendimento humano e discreto
             </p>
           </div>
-
-          {/* FAQ — resolve as objeções de confiança, discrição e entrega antes do WhatsApp */}
-          <FaqSection />
 
           {/* Espaço reservado para a barra fixa mobile não cobrir o final do conteúdo */}
           <div className="md:hidden h-20" />
