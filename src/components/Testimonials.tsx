@@ -2,16 +2,16 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    text: "Chegou tudo certinho ❤️ Já passei o contato de vocês para várias amigas!",
-    author: "Cliente Satisfeita",
+    text: "Chegou em menos de 1h30, embalagem totalmente discreta. Meu marido nem percebeu! Já indiquei pra três amigas. 💜",
+    author: "Ana R. — Palhoça",
   },
   {
-    text: "Amei! Muito obrigado. Atendimento nota 10, produtos de qualidade.",
-    author: "Cliente Verificado",
+    text: "Atendimento nota 10, sem julgamento nenhum. Me ajudaram a escolher o kit perfeito. Produto de qualidade e chegou super rápido!",
+    author: "Camila S. — São José",
   },
   {
-    text: "Eu que lhe agradeço pelo seu atendimento. Muito obrigada! 👏",
-    author: "Cliente Fiel",
+    text: "Nunca pensei que seria tão fácil e discreto. Comprei pelo WhatsApp, paguei no Pix e em 1h30 estava na minha porta. Recomendo demais!",
+    author: "Júlia M. — Florianópolis",
   },
 ];
 
@@ -28,10 +28,9 @@ const Testimonials = () => {
           ))}
         </div>
         <p className="text-muted-foreground font-body text-xs md:text-base">
-          Avaliações reais de clientes satisfeitas
+          +1.000 clientes atendidas com discrição em toda Grande Florianópolis
         </p>
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6">
         {testimonials.map((testimonial, index) => (
           <div
