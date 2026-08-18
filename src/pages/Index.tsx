@@ -1,25 +1,37 @@
-import heroBg from "@/assets/hero-bg.jpg";
-import logo from "@/assets/logo.png";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import { MessageCircle } from "lucide-react";
+import heroBg from "@/assets/hero-bg.jpg"; // ajuste o caminho conforme seu projeto
+import logo from "@/assets/logo.png"; // ajuste o caminho conforme seu projeto
 import FeatureCards from "@/components/FeatureCards";
 import Testimonials from "@/components/Testimonials";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/Footer";
-import { MessageCircle } from "lucide-react";
+import TrustBar from "@/components/TrustBar";
+import FaqSection from "@/components/FaqSection";
 
 const Index = () => {
-  // Número oficial Cheiro de Rosa
+  // Número oficial Cheiro de Rosa com código de país
   const myPhoneNumber = "5548988048880";
 
-  // Mensagem de WhatsApp altamente conversiva
-  const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=Oi!%20Quero%20ajuda%20pra%20escolher%20um%20kit%20ideal%20pra%20mim,%20pode%20me%20orientar?`;
+  // Mensagens de WhatsApp diferentes por origem = você sabe qual botão converte mais
+  const buildWhatsappUrl = (message: string) =>
+    `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(message)}`;
 
-  const handleWhatsClick = (origin: string) => {
+  const handleWhatsClick = (origin: string, message: string) => {
     if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Lead", {
+      (window as any).fbq("track", "Contact", {
         content_name: origin,
-        device: "mobile",
+        content_category: "Atendimento",
       });
     }
+    window.open(buildWhatsappUrl(message), "_blank", "noopener,noreferrer");
+  };
+
+  const messages = {
+    floating: "Olá! Vim pela página e quero conhecer os kits exclusivos.",
+    ctaMain:
+      "Oi! Quero ajuda pra escolher um kit ideal pra mim, pode me orientar?",
+    mobileFixed:
+      "Oi! Vim pelo site, pode me ajudar a escolher um kit com entrega hoje?",
   };
 
   return (
@@ -34,22 +46,15 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
       </div>
 
-      {/* Botão flutuante WhatsApp */}
-      <a
-        href={whatsappUrl}
-        onClick={() => handleWhatsClick("Botão Flutuante WhatsApp")}
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Botão flutuante WhatsApp (desktop e tablet — no mobile a barra fixa já cumpre esse papel) */}
+      <button
+        onClick={() => handleWhatsClick("Botão Flutuante", messages.floating)}
         aria-label="Atendimento privado no WhatsApp"
         title="Atendimento privado no WhatsApp"
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50
-        bg-[#25D366] text-white p-4 rounded-full
-        shadow-[0_10px_40px_-10px_rgba(37,211,102,0.5)]
-        hover:scale-110 active:scale-95 transition-all
-        animate-pulse flex items-center justify-center"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_40px_-10px_rgba(37,211,102,0.5)] hover:scale-110 active:scale-95 transition-all animate-pulse items-center justify-center border-none"
       >
         <MessageCircle size={30} />
-      </a>
+      </button>
 
       <main className="flex-1 relative z-10 flex flex-col items-center px-4 py-10 md:py-20">
         <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto space-y-8 md:space-y-12">
@@ -68,7 +73,7 @@ const Index = () => {
           <header className="space-y-4">
             <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-[1.1] tracking-tight">
               Ouse Descobrir <br />
-              <span className="text-coral">Novas Sensações</span>
+              <span className="text-coral drop-shadow-sm">Novas Sensações</span>
             </h1>
 
             {/* Subtítulo desktop */}
@@ -77,11 +82,14 @@ const Index = () => {
               Kits exclusivos para quem não aceita o comum.
             </p>
 
-            {/* Subtítulo mobile */}
+            {/* Subtítulo mobile — direto ao ponto, já entrega a promessa central */}
             <p className="md:hidden font-body text-sm text-coral-light/90 font-medium max-w-sm mx-auto leading-relaxed">
               Kits íntimos exclusivos com entrega discreta hoje em Floripa.
             </p>
           </header>
+
+          {/* Barra de confiança — CNPJ, prêmios, nota Google */}
+          <TrustBar />
 
           {/* Benefícios */}
           <section className="w-full">
@@ -93,7 +101,7 @@ const Index = () => {
             <Testimonials />
           </section>
 
-          {/* Micro prova social mobile */}
+          {/* Micro prova social mobile — reforço rápido antes do scroll acabar */}
           <div className="md:hidden flex items-center justify-center gap-2 text-xs text-muted-foreground">
             <span className="text-emerald-500">★★★★★</span>
             <span>Mais de 1.000 clientes atendidas com discrição</span>
@@ -102,8 +110,8 @@ const Index = () => {
           {/* CTA principal desktop */}
           <div className="hidden md:flex flex-col items-center gap-4 w-full max-w-md">
             <div
-              className="w-full"
-              onClick={() => handleWhatsClick("CTA Principal Desktop")}
+              className="w-full transform transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              onClick={() => handleWhatsClick("CTA Principal Desktop", messages.ctaMain)}
             >
               <WhatsAppButton
                 phoneNumber={myPhoneNumber}
@@ -111,16 +119,39 @@ const Index = () => {
               />
             </div>
 
+            <div className="flex items-center justify-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-emerald-500 text-xs md:text-sm font-semibold tracking-wide uppercase">
+                Consultoria privada disponível agora
+              </span>
+            </div>
+
+            <div className="space-y-1">
+              <p className="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest opacity-80">
+                Entrega discreta e imediata • Embalagem neutra
+              </p>
+              <p className="text-[10px] text-muted-foreground/60 italic">
+                Sua privacidade é nossa prioridade absoluta.
+              </p>
+            </div>
+
             <p className="text-sm text-muted-foreground">
               Sem compromisso • Atendimento humano e discreto
             </p>
           </div>
+
+          {/* FAQ — resolve as objeções de confiança, discrição e entrega antes do WhatsApp */}
+          <FaqSection />
+
+          {/* Espaço reservado para a barra fixa mobile não cobrir o final do conteúdo */}
+          <div className="md:hidden h-20" />
         </div>
       </main>
 
-      {/* CTA FIXO MOBILE */}
+      {/* CTA fixo mobile — a maior parte do seu tráfego provavelmente é mobile,
+          então este é o botão que mais importa */}
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur border-t border-coral/20 p-3">
-        <div onClick={() => handleWhatsClick("CTA Mobile Fixo")}>
+        <div onClick={() => handleWhatsClick("CTA Mobile Fixo", messages.mobileFixed)}>
           <WhatsAppButton
             phoneNumber={myPhoneNumber}
             label="FALAR COM UMA CONSULTORA AGORA"
@@ -128,9 +159,6 @@ const Index = () => {
         </div>
         <p className="text-[11px] text-muted-foreground text-center mt-1">
           Atendimento discreto • Sem compromisso • Resposta rápida
-        </p>
-        <p className="text-[10px] text-muted-foreground italic text-center">
-          Atendimento humano, sem julgamentos.
         </p>
       </div>
 
