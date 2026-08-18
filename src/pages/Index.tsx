@@ -69,13 +69,13 @@ const Index = () => {
 
             {/* Subtítulo desktop */}
             <p className="hidden md:block font-body text-lg text-coral-light/90 font-medium max-w-2xl mx-auto leading-relaxed">
-              Curadoria premium de bem-estar íntimo na Grande Florianópolis.
-              Kits exclusivos para quem não aceita o comum.
+              Curadoria premium de bem-estar íntimo, com embalagem 100% discreta
+              e entrega em até 1h30 na Grande Florianópolis.
             </p>
 
             {/* Subtítulo mobile — direto ao ponto, já entrega a promessa central */}
             <p className="md:hidden font-body text-sm text-coral-light/90 font-medium max-w-sm mx-auto leading-relaxed">
-              Kits íntimos exclusivos com entrega discreta hoje em Floripa.
+              Entrega 100% discreta em até 1h30, hoje mesmo em Floripa.
             </p>
           </header>
 
@@ -122,7 +122,7 @@ const Index = () => {
               */}
               <WhatsAppButton
                 phoneNumber={WHATSAPP_NUMBER}
-                label="FALAR COM UMA CONSULTORA AGORA"
+                label="QUERO ATENDIMENTO 100% DISCRETO"
                 onClick={() => handleWhatsClick("CTA Principal Desktop", WHATSAPP_MESSAGES.ctaMain)}
               />
             </div>
@@ -130,13 +130,13 @@ const Index = () => {
             <div className="flex items-center justify-center gap-3 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">
               <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-emerald-500 text-xs md:text-sm font-semibold tracking-wide uppercase">
-                Consultoria privada disponível agora
+                Pedido feito agora chega em até 1h30
               </span>
             </div>
 
             <div className="space-y-1">
               <p className="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest opacity-80">
-                Entrega discreta e imediata • Embalagem neutra
+                Entrega em até 1h30 • Embalagem neutra
               </p>
               <p className="text-[10px] text-muted-foreground/60 italic">
                 Sua privacidade é nossa prioridade absoluta.
@@ -158,11 +158,11 @@ const Index = () => {
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur border-t border-coral/20 p-3">
         <WhatsAppButton
           phoneNumber={WHATSAPP_NUMBER}
-          label="FALAR COM UMA CONSULTORA AGORA"
+          label="QUERO ATENDIMENTO 100% DISCRETO"
           onClick={() => handleWhatsClick("CTA Mobile Fixo", WHATSAPP_MESSAGES.mobileFixed)}
         />
         <p className="text-[11px] text-muted-foreground text-center mt-1">
-          Atendimento discreto • Sem compromisso • Resposta rápida
+          Entrega em até 1h30 • Sem compromisso • Resposta rápida
         </p>
       </div>
 
