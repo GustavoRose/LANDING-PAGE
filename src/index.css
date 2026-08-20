@@ -71,19 +71,12 @@
   .shadow-gold {
     box-shadow: var(--shadow-gold);
   }
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
   .animate-shimmer {
     animation: shimmer 3s ease-in-out infinite;
   }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px hsl(142 70% 40% / 0.5), 0 0 40px hsl(142 70% 40% / 0.3); }
