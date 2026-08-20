@@ -41,8 +41,8 @@ const WhatsAppButton = ({
   return (
     <button
       onClick={handleClick}
-      className="group relative inline-flex items-center gap-2 md:gap-3 px-5 py-4 md:px-10 md:py-5
-                 text-sm sm:text-base md:text-lg font-semibold 
+      className="group relative inline-flex items-center gap-2.5 md:gap-3 px-6 py-5 md:px-10
+                 text-base sm:text-lg font-semibold 
                  bg-[#25D366] text-white rounded-full
                  transition-all duration-300 ease-out
                  hover:scale-105 hover:bg-[#20bd5a]
@@ -50,7 +50,7 @@ const WhatsAppButton = ({
                  shadow-[0_10px_40px_-10px_rgba(37,211,102,0.5)]
                  cursor-pointer border-none w-full justify-center text-center"
     >
-      <MessageCircle className="w-5 h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+      <MessageCircle className="w-6 h-6 shrink-0 transition-transform duration-300 group-hover:scale-110" />
       <span className="font-body tracking-wide leading-tight">{label}</span>
     </button>
   );
