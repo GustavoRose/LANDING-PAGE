@@ -50,11 +50,13 @@ const Index = () => {
       <main className="flex-1 relative z-10 flex flex-col items-center px-4 py-10 md:py-20">
         <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto space-y-8 md:space-y-12">
           {/* Logo */}
-          <div className="animate-float">
+          <div>
             <img
               src={logo}
               alt="Cheiro de Rosa"
               className="h-16 md:h-28 w-auto drop-shadow-2xl"
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
 
