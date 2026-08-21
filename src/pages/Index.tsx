@@ -6,6 +6,7 @@ import Testimonials from "@/components/Testimonials";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
+import CustomKitSection from "@/components/CustomKitSection";
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGES, buildWhatsappUrl } from "@/config/contact";
 
 const Index = () => {
@@ -80,6 +81,16 @@ const Index = () => {
               Entrega 100% discreta em até 1h30, hoje mesmo em Floripa.
             </p>
           </header>
+
+          {/* Seção que fecha o gap com anúncios de kit/produto específico:
+              como não trabalhamos com kits fechados em estoque, comunicamos
+              a montagem personalizada como diferencial em vez de mostrar
+              um produto que pode não estar mais disponível. */}
+          <CustomKitSection
+            onCtaClick={() =>
+              handleWhatsClick("CTA Kit Personalizado", WHATSAPP_MESSAGES.customKit)
+            }
+          />
 
           {/* Barra de confiança — CNPJ, prêmios, nota Google */}
           <TrustBar />
