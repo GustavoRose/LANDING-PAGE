@@ -84,13 +84,10 @@ const Index = () => {
 
           {/* Seção que fecha o gap com anúncios de kit/produto específico:
               como não trabalhamos com kits fechados em estoque, comunicamos
-              a montagem personalizada como diferencial em vez de mostrar
-              um produto que pode não estar mais disponível. */}
-          <CustomKitSection
-            onCtaClick={() =>
-              handleWhatsClick("CTA Kit Personalizado", WHATSAPP_MESSAGES.customKit)
-            }
-          />
+              a montagem personalizada como diferencial. Sem CTA próprio —
+              direciona para o botão principal abaixo, que já é o CTA com
+              tracking e otimização de conversão configurados. */}
+          <CustomKitSection />
 
           {/* Barra de confiança — CNPJ, prêmios, nota Google */}
           <TrustBar />
@@ -135,7 +132,7 @@ const Index = () => {
               */}
               <WhatsAppButton
                 phoneNumber={WHATSAPP_NUMBER}
-                label="QUERO ATENDIMENTO 100% DISCRETO"
+                label="MONTAR MEU KIT AGORA"
                 onClick={() => handleWhatsClick("CTA Principal Desktop", WHATSAPP_MESSAGES.ctaMain)}
               />
             </div>
@@ -171,7 +168,7 @@ const Index = () => {
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur border-t border-coral/20 p-3">
         <WhatsAppButton
           phoneNumber={WHATSAPP_NUMBER}
-          label="QUERO ATENDIMENTO 100% DISCRETO"
+          label="MONTAR MEU KIT AGORA"
           onClick={() => handleWhatsClick("CTA Mobile Fixo", WHATSAPP_MESSAGES.mobileFixed)}
         />
         <p className="text-[11px] text-muted-foreground text-center mt-1">
