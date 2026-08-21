@@ -5,11 +5,11 @@
 export const WHATSAPP_NUMBER = "5548988048880";
 
 export const WHATSAPP_MESSAGES = {
-  floating: "Olá! Vim pela página e quero saber mais sobre os produtos.",
+  floating: "Olá! Vi o anúncio e quero montar um kit personalizado.",
   ctaMain:
-    "Oi! Quero ajuda pra escolher o produto ideal pra mim, pode me orientar?",
+    "Oi! Quero montar um kit personalizado comigo, pode me ajudar a escolher?",
   mobileFixed:
-    "Oi! Vim pelo site, pode me ajudar a escolher algo com entrega hoje?",
+    "Oi! Vim pelo site e quero montar um kit personalizado com entrega hoje.",
 } as const;
 
 export function buildWhatsappUrl(phoneNumber: string, message: string) {
